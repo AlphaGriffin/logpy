@@ -6,6 +6,7 @@ Alpha Griffin Python Logger
 Logging system for Python.
 
 These common log levels are defined:
+
 1. **FATAL** - logic violation, major flaw, or potentially halting error
 2. **ERROR** - these generally indicate a problem
 3. **WARN** - warnings but not necessarily a problem
