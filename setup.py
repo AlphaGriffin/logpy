@@ -22,7 +22,7 @@ if __name__ == '__main__':
 
     setup(
 
-        name='pyproject',
+        name='aglog',
         version='0.0.1',
         license='AG', # FIXME
 
@@ -32,7 +32,7 @@ if __name__ == '__main__':
         author='Lannocc @ Alpha Griffin',
         author_email='lannocc@alphagriffin.com',
 
-        description='Alpha Griffin Starter Python Project',
+        description='Alpha Griffin Python Logging',
         long_description=open('README.rst').read(),
         url='http://alphagriffin.com',
 
@@ -42,15 +42,14 @@ if __name__ == '__main__':
             'Intended Audience :: Developers',
             'Natural Language :: English',
             'Programming Language :: Python',
-            'Topic :: System :: Installation/Setup',
             'Topic :: Utilities'
         ],
 
         # space-separated list of keywords
-        keywords='alphagriffin example utilities',
+        keywords='alphagriffin logger utilities',
 
         # run-time dependencies
-        install_requires=['setuptools'], # setuptools here for example only (it's implied)
+        install_requires=[],
 
         extras_require={
         },

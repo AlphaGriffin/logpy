@@ -1,6 +1,7 @@
 *.swp
 
+build/
 dist/
 
-pyproject.egg-info/
+aglog.egg-info/
 
