@@ -1,7 +1,15 @@
 *.swp
 
-build/
-dist/
+/build/
+/dist/
 
-aglog.egg-info/
+/doc/doctrees
+/doc/man
+/doc/html
+/doc/text
+/doc/coverage
+
+__pycache__
+
+*.egg-info/
 

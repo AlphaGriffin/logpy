@@ -5,6 +5,10 @@ Alpha Griffin Python Logger
 
 Logging system for Python.
 
+.. contents:: Table of Contents
+.. toctree::
+   API Documentation <api/modules>
+
 These common log levels are defined:
 
 1. **FATAL** - logic violation, major flaw, or potentially halting error
@@ -35,4 +39,20 @@ Example usage of the logging system in a Python script::
     # some log printing examples
     log.warn('this warning message is shown at level 3')
     log.debug('this debug message is NOT shown at level 3')
+
+
+Distributing
+------------
+
+Since we use the standard setuptools package, it is very easy to make source and binary distributions.
+
+To make a *source* distribution::
+
+    python setup.py sdist
+
+To make a *binary* distribution::
+
+    python setup.py bdist_wheel
+
+The distributions will collect in the dist/ directory.
 

@@ -6,7 +6,7 @@ Alpha Griffin Logging
 
 @author lannocc
 """
-__version__ = '0.0.1'
+from ag.logging.__version__ import __version__
 
 import sys
 this = sys.modules[__name__]
