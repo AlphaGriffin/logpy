@@ -21,7 +21,7 @@ Some of this script logic also taken from:
 #
 
 NS      = 'ag'                          # namespace / meta-package folder
-NAME    = 'aglog'                       # should match source package name in NS folder
+NAME    = 'logging'                     # should match source package name in NS folder
 REQUIRE = ['setuptools']                # package dependencies
 
 DESC    = 'Alpha Griffin Python Logging'
