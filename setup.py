@@ -36,10 +36,11 @@ COPY    = '2017 Alpha Griffin'          # copyright
 
 CLASS   = [
     # @see https://pypi.python.org/pypi?%3Aaction=list_classifiers
-    'Development Status :: 3 - Alpha',
+    'Development Status :: 4 - Beta',
     'Intended Audience :: Developers',
     'Natural Language :: English',
     'Programming Language :: Python',
+    'Topic :: System :: Logging',
     'Topic :: Utilities'
 ]
 
