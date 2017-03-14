@@ -1,10 +1,10 @@
-ag.pyproject package
-====================
+ag.logging package
+==================
 
 Module contents
 ---------------
 
-.. automodule:: ag.pyproject
+.. automodule:: ag.logging
     :members:
     :undoc-members:
     :show-inheritance:
