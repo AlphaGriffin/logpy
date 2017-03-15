@@ -30,12 +30,12 @@ def set(level):
 
     .. note::
         Use one of the following log levels:
-            * ``0 -- NONE``: all logging disabled
-            * ``1 -- FATAL``: fatal messages only
-            * ``2 -- ERROR``: errors and fatal messages
-            * ``3 -- WARN``: warnings, errors, and fatal messages
-            * ``4 -- INFO``: information, warnings, errors, and fatal messages
-            * ``5 -- DEBUG``: all logging enabled
+            0. ``NONE``: all logging disabled
+            1. ``FATAL``: fatal messages only
+            2. ``ERROR``: errors and fatal messages
+            3. ``WARN``: warnings, errors, and fatal messages
+            4. ``INFO``: information, warnings, errors, and fatal messages
+            5. ``DEBUG``: all logging enabled
     """
     this.level = level
 
@@ -47,7 +47,7 @@ def fatal(msg):
     These are generally halting errors.
 
     :param  msg:    Message to log
-    :param  msg:    str
+    :type   msg:    str
     """
 
     if this.level >= 1:
@@ -60,7 +60,7 @@ def error(msg):
     Errors indicate a problem but are usually recoverable by the application.
 
     :param  msg:    Message to log
-    :param  msg:    str
+    :type   msg:    str
     """
 
     if this.level >= 2:
@@ -73,7 +73,7 @@ def warn(msg):
     Warnings indicate to the user a minor error state or possible condition that might require attention.
 
     :param  msg:    Message to log
-    :param  msg:    str
+    :type   msg:    str
     """
 
     if this.level >= 3:
@@ -86,7 +86,7 @@ def info(msg):
     An informational message helps the user follow what the program is doing.
 
     :param  msg:    Message to log
-    :param  msg:    str
+    :type   msg:    str
     """
 
     if this.level >= 4:
@@ -99,7 +99,7 @@ def debug(msg):
     Debug messages are not intended for the casual user.
 
     :param  msg:    Message to log
-    :param  msg:    str
+    :type   msg:    str
     """
 
     if this.level >= 5:
