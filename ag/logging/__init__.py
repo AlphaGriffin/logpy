@@ -5,9 +5,9 @@
 
 A simple logging system for Python.
 
-.. module:: ag.pyproject
+.. module:: ag.logging
    :platform: Unix
-   :synopsis: Python Starter Project for Alpha Griffin
+   :synopsis: Alpha Griffin Logging for Python
 .. moduleauthor:: Shawn Wilson <lannocc@alphagriffin.com>
 """
 from ag.logging.__version__ import __version__
@@ -16,6 +16,16 @@ import sys
 this = sys.modules[__name__]
 this.level = 0
 
+
+from enum import Enum
+
+class Level(Enum):
+    NONE = 0
+    FATAL = 1
+    ERROR = 2
+    WARN = 3
+    INFO = 4
+    DEBUG = 5
 
 
 def set(level):
@@ -37,10 +47,26 @@ def set(level):
             4. ``INFO``: information, warnings, errors, and fatal messages
             5. ``DEBUG``: all logging enabled
     """
-    this.level = level
+    if type(level) is Level:
+        if level == Level.NONE:
+            this.level = 0
+        elif level == Level.FATAL:
+            this.level = 1
+        elif level == Level.ERROR:
+            this.level = 2
+        elif level == Level.WARN:
+            this.level = 3
+        elif level == Level.INFO:
+            this.level = 4
+        elif level == Level.DEBUG:
+            this.level = 5
+        else:
+            raise TypeError('Not a known Level value')
+    else:
+        this.level = level
 
 
-def fatal(msg):
+def fatal(msg, *argv, **kwargs):
     """Log a fatal message.
 
     Fatal messages should be reserved for the most critical errors.
@@ -51,10 +77,10 @@ def fatal(msg):
     """
 
     if this.level >= 1:
-        print(" #F# {}".format(msg))
+        _log('!', 'F', msg, *argv, **kwargs);
 
 
-def error(msg):
+def error(msg, *argv, **kwargs):
     """Log an error.
 
     Errors indicate a problem but are usually recoverable by the application.
@@ -64,10 +90,10 @@ def error(msg):
     """
 
     if this.level >= 2:
-        print(" %E% {}".format(msg))
+        _log('%', 'E', msg, *argv, **kwargs);
 
 
-def warn(msg):
+def warn(msg, *argv, **kwargs):
     """Log a warning.
 
     Warnings indicate to the user a minor error state or possible condition that might require attention.
@@ -77,10 +103,10 @@ def warn(msg):
     """
 
     if this.level >= 3:
-        print(" !W! {}".format(msg))
+        _log('*', 'W', msg, *argv, **kwargs);
 
 
-def info(msg):
+def info(msg, *argv, **kwargs):
     """Log something informative.
 
     An informational message helps the user follow what the program is doing.
@@ -90,10 +116,10 @@ def info(msg):
     """
 
     if this.level >= 4:
-        print(" *I* {}".format(msg))
+        _log('#', 'I', msg, *argv, **kwargs);
 
 
-def debug(msg):
+def debug(msg, *argv, **kwargs):
     """Log a message for debugging / diagnostic purposes.
 
     Debug messages are not intended for the casual user.
@@ -103,6 +129,23 @@ def debug(msg):
     """
 
     if this.level >= 5:
-        print(" ~D~ {}".format(msg))
+        _log('~', 'D', msg, *argv, **kwargs);
 
 
+
+
+
+def _log(symbol, letter, msg, *argv, **kwargs):
+    lines = msg.split('\n')
+
+    for i, line in enumerate(lines):
+        if i < 1:
+            print(" {}{}{} {}".format(symbol, letter, symbol, line))
+        else:
+            print(" {} {} {}".format(symbol, symbol, line))
+
+    for arg in argv:
+        print(" {} {} : => {}".format(symbol, symbol, arg))
+
+    for name, value in kwargs.items():
+        print(" {} {} :{} => {}".format(symbol, symbol, name, value))
