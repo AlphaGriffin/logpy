@@ -17,16 +17,12 @@ this = sys.modules[__name__]
 this.level = 0
 
 
-from enum import Enum
-
-class Level(Enum):
-    NONE = 0
-    FATAL = 1
-    ERROR = 2
-    WARN = 3
-    INFO = 4
-    DEBUG = 5
-
+NONE = 0
+FATAL = 1
+ERROR = 2
+WARN = 3
+INFO = 4
+DEBUG = 5
 
 def set(level):
     """Set log level.
@@ -47,23 +43,7 @@ def set(level):
             4. ``INFO``: information, warnings, errors, and fatal messages
             5. ``DEBUG``: all logging enabled
     """
-    if type(level) is Level:
-        if level == Level.NONE:
-            this.level = 0
-        elif level == Level.FATAL:
-            this.level = 1
-        elif level == Level.ERROR:
-            this.level = 2
-        elif level == Level.WARN:
-            this.level = 3
-        elif level == Level.INFO:
-            this.level = 4
-        elif level == Level.DEBUG:
-            this.level = 5
-        else:
-            raise TypeError('Not a known Level value')
-    else:
-        this.level = level
+    this.level = level
 
 
 def fatal(msg, *argv, **kwargs):

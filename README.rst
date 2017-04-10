@@ -45,6 +45,7 @@ Build all the common tasks (including documentation) as follows::
 To clean up all the common generated files from your project folder::
 
     make clean
+
 To install this project to the local system::
 
     make install
@@ -74,7 +75,7 @@ Example usage of the logging system in a Python script::
     import ag.logging as log
 
     # set global logging level
-    log.set(3) # see all WARN, ERROR, FATAL
+    log.set(log.WARN) # see all WARN and higher (WARN, ERROR, FATAL)
 
     # some log printing examples
     log.warn('this warning message is shown at level 3')
