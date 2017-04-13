@@ -1,6 +1,8 @@
 Copyright (C) 2017 Alpha Griffin
 @%@~LICENSE~@%@
 
+saw_041317_2 - Let the log calls take any object as first/only argument (fixes issue #1).
+
 saw_041317_1 - Ignore any calls to log.set() after the first one.
 
 saw_040917_2 - Fix for Python 2.7: skipping the enum, using simple names instead.

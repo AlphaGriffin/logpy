@@ -120,6 +120,7 @@ def debug(msg, *argv, **kwargs):
 
 
 def _log(symbol, letter, msg, *argv, **kwargs):
+    msg = str(msg)
     lines = msg.split('\n')
 
     for i, line in enumerate(lines):
