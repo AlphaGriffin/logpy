@@ -1,6 +1,8 @@
 Copyright (C) 2017 Alpha Griffin
 @%@~LICENSE~@%@
 
+saw_041317_1 - Ignore any calls to log.set() after the first one.
+
 saw_040917_2 - Fix for Python 2.7: skipping the enum, using simple names instead.
 
 saw_040917_1 - Improved formatting and new enum type for setting log level (fixes #44 and #45).

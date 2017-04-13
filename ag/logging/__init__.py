@@ -14,7 +14,7 @@ from ag.logging.__version__ import __version__
 
 import sys
 this = sys.modules[__name__]
-this.level = 0
+this.level = -1
 
 
 NONE = 0
@@ -28,7 +28,8 @@ def set(level):
     """Set log level.
     
     Sets the global cutoff level for logging output.
-    This should be called early and should only be called once.
+    This should be called early and need only be called once,
+    as the cutoff gets fixed the first time this is called.
     If no level is set then the logging system is disabled.
 
     :param  level:  Log printing threshold
@@ -43,7 +44,10 @@ def set(level):
             4. ``INFO``: information, warnings, errors, and fatal messages
             5. ``DEBUG``: all logging enabled
     """
-    this.level = level
+    if this.level == -1:
+        this.level = level
+    else:
+        debug("ignoring subsequent call to log.set with:", level=level)
 
 
 def fatal(msg, *argv, **kwargs):
