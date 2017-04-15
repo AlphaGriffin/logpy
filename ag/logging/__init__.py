@@ -16,6 +16,7 @@ import sys
 this = sys.modules[__name__]
 this.level = -1
 
+import traceback
 
 NONE = 0
 FATAL = 1
@@ -120,17 +121,35 @@ def debug(msg, *argv, **kwargs):
 
 
 def _log(symbol, letter, msg, *argv, **kwargs):
-    msg = str(msg)
-    lines = msg.split('\n')
-
-    for i, line in enumerate(lines):
-        if i < 1:
-            print(" {}{}{} {}".format(symbol, letter, symbol, line))
-        else:
-            print(" {} {} {}".format(symbol, symbol, line))
+    msg = _handle(symbol, letter, msg, False)
 
     for arg in argv:
-        print(" {} {} : => {}".format(symbol, symbol, arg))
+        _handle(symbol, letter, arg, True)
 
     for name, value in kwargs.items():
-        print(" {} {} :{} => {}".format(symbol, symbol, name, value))
+        _handle(symbol, letter, value, True, name=name)
+
+
+def _handle(symbol, letter, obj, arg, name=None):
+    if isinstance(obj, Exception):
+        msg = traceback.format_exc()
+    else:
+        msg = str(obj)
+
+    lines = msg.split('\n')
+    for i, line in enumerate(lines):
+        if i < 1:
+            if not arg:
+                print(" {}{}{} {}".format(symbol, letter, symbol, line))
+            elif name is None:
+                print(" {} {} : => {}".format(symbol, symbol, line))
+            else:
+                print(" {} {} :{} => {}".format(symbol, symbol, name, line))
+        else:
+            if not arg:
+                print(" {} {} {}".format(symbol, symbol, line))
+            elif name is None:
+                print(" {} {} : => {}".format(symbol, symbol, line))
+            else:
+                print(" {} {} :{} => {}".format(symbol, symbol, name, line))
+
