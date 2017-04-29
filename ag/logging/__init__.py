@@ -51,7 +51,7 @@ def set(level):
         debug("ignoring subsequent call to log.set with:", level=level)
 
 
-def fatal(msg, *argv, **kwargs):
+def fatal(msg=None, *argv, **kwargs):
     """Log a fatal message.
 
     Fatal messages should be reserved for the most critical errors.
@@ -62,10 +62,14 @@ def fatal(msg, *argv, **kwargs):
     """
 
     if this.level >= 1:
-        _log('!', 'F', msg, *argv, **kwargs);
+        trace = False
+        if msg is None:
+            trace = True
+
+        _log('!', 'F', msg, trace=trace, *argv, **kwargs);
 
 
-def error(msg, *argv, **kwargs):
+def error(msg=None, *argv, **kwargs):
     """Log an error.
 
     Errors indicate a problem but are usually recoverable by the application.
@@ -75,10 +79,14 @@ def error(msg, *argv, **kwargs):
     """
 
     if this.level >= 2:
-        _log('%', 'E', msg, *argv, **kwargs);
+        trace = False
+        if msg is None:
+            trace = True
+
+        _log('%', 'E', msg, trace=trace, *argv, **kwargs);
 
 
-def warn(msg, *argv, **kwargs):
+def warn(msg=None, *argv, **kwargs):
     """Log a warning.
 
     Warnings indicate to the user a minor error state or possible condition that might require attention.
@@ -88,7 +96,11 @@ def warn(msg, *argv, **kwargs):
     """
 
     if this.level >= 3:
-        _log('*', 'W', msg, *argv, **kwargs);
+        trace = False
+        if msg is None:
+            trace = True
+
+        _log('*', 'W', msg, trace=trace, *argv, **kwargs);
 
 
 def info(msg, *argv, **kwargs):
@@ -120,18 +132,21 @@ def debug(msg, *argv, **kwargs):
 
 
 
-def _log(symbol, letter, msg, *argv, **kwargs):
-    msg = _handle(symbol, letter, msg, False)
+def _log(symbol, letter, msg, trace=False, *argv, **kwargs):
+    msg = _handle(symbol, letter, msg, False, trace=trace)
 
     for arg in argv:
-        _handle(symbol, letter, arg, True)
+        _handle(symbol, letter, arg, True, trace=trace)
 
     for name, value in kwargs.items():
-        _handle(symbol, letter, value, True, name=name)
+        _handle(symbol, letter, value, True, trace=trace, name=name)
 
 
-def _handle(symbol, letter, obj, arg, name=None):
+def _handle(symbol, letter, obj, arg, trace=False, name=None):
     if isinstance(obj, Exception):
+        msg = traceback.format_exc()
+    elif trace:
+        #msg = obj[2].format_exc()
         msg = traceback.format_exc()
     else:
         msg = str(obj)
