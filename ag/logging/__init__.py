@@ -17,6 +17,7 @@ this = sys.modules[__name__]
 this.level = -1
 
 import traceback
+import inspect
 
 NONE = 0
 FATAL = 1
@@ -62,9 +63,9 @@ def fatal(msg=None, *argv, **kwargs):
     """
 
     if this.level >= 1:
-        trace = False
+        trace = 0
         if msg is None:
-            trace = True
+            trace = 2
 
         _log('!', 'F', msg, trace=trace, *argv, **kwargs);
 
@@ -79,9 +80,9 @@ def error(msg=None, *argv, **kwargs):
     """
 
     if this.level >= 2:
-        trace = False
+        trace = 0
         if msg is None:
-            trace = True
+            trace = 2
 
         _log('%', 'E', msg, trace=trace, *argv, **kwargs);
 
@@ -96,9 +97,9 @@ def warn(msg=None, *argv, **kwargs):
     """
 
     if this.level >= 3:
-        trace = False
+        trace = 0
         if msg is None:
-            trace = True
+            trace = 2
 
         _log('*', 'W', msg, trace=trace, *argv, **kwargs);
 
@@ -116,7 +117,7 @@ def info(msg, *argv, **kwargs):
         _log('#', 'I', msg, *argv, **kwargs);
 
 
-def debug(msg, *argv, **kwargs):
+def debug(msg=None, *argv, **kwargs):
     """Log a message for debugging / diagnostic purposes.
 
     Debug messages are not intended for the casual user.
@@ -126,13 +127,17 @@ def debug(msg, *argv, **kwargs):
     """
 
     if this.level >= 5:
-        _log('~', 'D', msg, *argv, **kwargs);
+        trace = 0
+        if msg is None:
+            trace = 1
+
+        _log('~', 'D', msg, trace=trace, *argv, **kwargs);
 
 
 
 
 
-def _log(symbol, letter, msg, trace=False, *argv, **kwargs):
+def _log(symbol, letter, msg, trace=0, *argv, **kwargs):
     msg = _handle(symbol, letter, msg, False, trace=trace)
 
     for arg in argv:
@@ -142,12 +147,22 @@ def _log(symbol, letter, msg, trace=False, *argv, **kwargs):
         _handle(symbol, letter, value, True, trace=trace, name=name)
 
 
-def _handle(symbol, letter, obj, arg, trace=False, name=None):
+def _handle(symbol, letter, obj, arg, trace=0, name=None):
     if isinstance(obj, Exception):
         msg = traceback.format_exc()
-    elif trace:
+    elif trace >= 2:
         #msg = obj[2].format_exc()
         msg = traceback.format_exc()
+    elif trace >= 1:
+        stack = inspect.stack()[3][0]
+        locals = stack.f_locals
+        lself = locals['self']
+        if lself is not None:
+            msg = lself.__class__.__name__ + '::'
+        else:
+            msg = ''
+        code = stack.f_code
+        msg += code.co_name + str(code.co_varnames)
     else:
         msg = str(obj)
 
