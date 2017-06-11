@@ -1,6 +1,8 @@
 Copyright (C) 2017 Alpha Griffin
 @%@~LICENSE~@%@
 
+saw_061117_1 - Use underscore in function parameters to avoid collision with user-supplied kwargs.
+
 saw_051817_1 - Allow empty call to debug() which will log the current class and function.
 
 saw_042917_1 - Automatic exception traces for empty-argument calls to fatal, error, or warn.
