@@ -20,8 +20,8 @@ These common log levels are defined:
 Installation Instructions
 --------------
 
-Install with pip directly from this repository.
-  .. highlight:: bash
+Install with pip directly from this repository::
+
      pip install git+https://github.com/alphagriffin/logpy
 
   Win10 x64: Working
