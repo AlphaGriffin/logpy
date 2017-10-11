@@ -24,7 +24,8 @@ Install with pip directly from this repository::
 
      pip install git+https://github.com/alphagriffin/logpy
 
-  Win10 x64: Working
+Win10 x64: Working
+Ubuntu: Working
 
 Build Overview
 --------------
