@@ -17,6 +17,16 @@ These common log levels are defined:
 4. **INFO** - informational messages
 5. **DEBUG** - verbose and often extraneous, but useful for debugging purposes
 
+Installation Instructions
+--------------
+
+Install with pip directly from this repository.
+  .. highlight:: bash
+  :linenos:
+
+  pip install git+https://github.com/alphagriffin/logpy
+
+  Win10 x64: Working
 
 Build Overview
 --------------
@@ -86,4 +96,3 @@ If you have not installed the project system-wide or you have some changes to tr
     import sys, os
     sys.path.insert(0, os.path.abspath('/path/to/logpy'))
     import ag.logging
-
