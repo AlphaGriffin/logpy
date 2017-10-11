@@ -22,9 +22,7 @@ Installation Instructions
 
 Install with pip directly from this repository.
   .. highlight:: bash
-  :linenos:
-
-  pip install git+https://github.com/alphagriffin/logpy
+     pip install git+https://github.com/alphagriffin/logpy
 
   Win10 x64: Working
 
